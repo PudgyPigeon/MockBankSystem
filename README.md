@@ -27,9 +27,6 @@ Script adds CWD to python path
 ```
 ./run_unit_tests.sh
 ```
-
-## Estimated Time Spent on Task: 5 Hours
-
 ## Things I Would Add Given More Time
 - Containerization of runtime with Docker image or Conda Envs
 - Refactor mock dataframes in Unit tests to utilize mock_file_paths with real CSVs with fake data instead
