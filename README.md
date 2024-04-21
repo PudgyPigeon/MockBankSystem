@@ -7,11 +7,13 @@ pip install -r requirements.txt
 Then in your terminal run:
 
 ```
-python3 -m entrypoint.py
+python3 entrypoint.py
 
 or 
 
-python -m entrypoint.py
+python entrypoint.py
+
+# Use -m flag if needed
 ```
 
 Then follow the onscreen prompts to use the mock banking system.
