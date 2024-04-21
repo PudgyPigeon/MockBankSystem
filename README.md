@@ -21,6 +21,13 @@ You may view the CSV state file within the data directory.
 ### Password for both users in Git repo (/data/bank_system.csv) 
 "hello"
 
+## Unit tests
+Run the unit test script in order to run tests
+Script adds CWD to python path
+```
+./run_unit_tests.sh
+```
+
 ## Estimated Time Spent on Task: 5 Hours
 
 ## Things I Would Add Given More Time
