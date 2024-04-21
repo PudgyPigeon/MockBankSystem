@@ -39,3 +39,5 @@ Script adds CWD to python path
 - More custom exceptions
 - Collapse common functionality into simpler system design
 - Use Rich-Click Package for pretty printing and bette formatting
+- Move entrypoint into a /src dir (or bank_app, etc) where services and data will be too
+      - Refactoring this would break imports in tests however
