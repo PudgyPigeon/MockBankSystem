@@ -14,7 +14,7 @@ Then follow the onscreen prompts to use the mock banking system.
 
 You may view the CSV state file within the data directory.
 
-### Password for both users in Git repo (/data/bank_system.csv) 
+### Password for both users in Git repo (bank_app/data/bank_system.csv) 
 "hello"
 
 ## Unit tests
