@@ -31,8 +31,10 @@ class User:
         self.username = username if username is not None else ""
         self.password = self.hash_password(password) if password is not None else ""
         self.logged_in = False
-        self.csv_path = "data/bank_system.csv"
-
+        self.csv_path = os.path.join(
+            os.getcwd(), "bank_app", "data", "bank_system.csv"
+        )
+        
     def hash_password(self, password: str) -> str:
         """
         Hash the inputted password for security
@@ -190,7 +192,6 @@ class UserService():
             new_user = User(username, password)
             
             if new_user.create(balance):
-                print("here")
                 logging.info("Successfully created new user!")
                 logging.info("Please restart the program and login to access your account.")
             else:

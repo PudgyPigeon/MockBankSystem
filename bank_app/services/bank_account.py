@@ -1,13 +1,17 @@
+import os
 import polars as pl
 import logging
-from services.users import User
+from bank_app.services.users import User
 
 logging.basicConfig(level=logging.INFO)
 
 class BankAccount:
     def __init__(self, user: User):
         self.user = user
-        
+        self.csv_path = os.path.join(
+            os.getcwd(),"bank_app", "data", "bank_system.csv"
+        )
+                
     @property
     def balance(self) -> float:
         """
@@ -47,7 +51,7 @@ class BankAccount:
             float: Balance from file
         """
         try:
-            df = pl.read_csv(f"data/bank_system.csv")
+            df = pl.read_csv(self.csv_path)
             user_row = df.filter(df["Username"] == self.user.username)
             if user_row.height != 0:
                 return float(user_row["Balance"][0])
@@ -67,7 +71,7 @@ class BankAccount:
             e: Error with write operation
         """
         try:
-            df = pl.read_csv(f"data/bank_system.csv")
+            df = pl.read_csv(self.csv_path)
             user_row = df.filter(df["Username"] == username)
             if user_row.height != 0:
                 df = df.with_columns(
@@ -78,7 +82,7 @@ class BankAccount:
                         .alias("Balance")
                     )
                 )
-                df.write_csv(f"data/bank_system.csv")
+                df.write_csv(self.csv_path)
         except Exception as e:
             logging.error(f"Error: {e}")
             raise e 
@@ -154,12 +158,11 @@ class BankAccountService:
                     recipient = input("Enter the username of the recipient: ")
                     amount = float(input("Enter the amount you want to transfer: "))
                     
-                    self.bank_account.withdraw(amount)
-                    recipient_account = BankAccount(User(recipient))
-                    recipient_account.deposit(amount)
-                    logging.info(f"Transferred {amount} to {recipient}.")
-                    logging.info(f"Your new balance is: {self.bank_account.balance}")
-                    
+                    self.transfer(
+                        self.bank_account, 
+                        BankAccount(User(recipient)), 
+                        amount
+                    )
                 elif choice == "4":
                     logging.info(f"Your current balance is: {self.bank_account.balance}")
                     
@@ -169,3 +172,22 @@ class BankAccountService:
             except Exception as e:
                 logging.error(f"Error: {e}")
                 logging.error("Please try again or exit the process with '5'")
+                
+    def transfer(
+        self, 
+        source_account: BankAccount, 
+        recipient_account: BankAccount, 
+        amount: float
+    ) -> None:
+        """
+        Transfer amount from current user to recipient
+
+        Args:
+            source_account (BankAccount): Source account
+            recipient_account (BankAccount): Recipient account
+            amount (float): Amount to transfer
+        """
+        source_account.withdraw(amount)
+        recipient_account.deposit(amount)
+        logging.info(f"Transferred {amount} to {recipient_account.user.username}.")
+        logging.info(f"Your new balance is: {source_account.balance}")
