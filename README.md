@@ -47,8 +47,6 @@ Script adds CWD to python path
 ./run_unit_tests.sh
 ```
 ## Things I Would Add Given More Time
-- Containerization of runtime with Docker image or Conda Envs
 - More error handling surrounding incorrect input validation
 - More custom exceptions
-- Collapse common functionality into simpler system design
-- Use Rich-Click Package for pretty printing and bette formatting
+- Use Rich-Click Package for pretty printing and better formatting
