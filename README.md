@@ -30,9 +30,11 @@ Ex.) ./dockerized_run.sh build current_terminal
 ```
 ### Valid arguments for Arg1
 build: Build out the docker image
+
 skip: Skip building the docker iamge
 ### Valid arguments for Arg2
 detached: Run docker container in detached mode. Port 80 is mapped to 80. Allows exec commands/SSH, attaching to IDE.
+
 current_terminal: Run docker container in line - will immediately start the `bank_app` process
 
 ## Password for both users in Git repo (bank_app/data/bank_system.csv) 

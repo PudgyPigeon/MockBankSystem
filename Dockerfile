@@ -1,7 +1,5 @@
 from python:3.10-slim-buster
 
-# Too much time to debug this plus unit tests so just placeholder for now
-
 WORKDIR /app
 
 COPY . /app
